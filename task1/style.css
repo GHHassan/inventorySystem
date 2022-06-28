@@ -1,0 +1,135 @@
+*{
+    font-family: 'Roboto', sans-serif;
+}
+
+h1{
+    color: green;
+    text-align: center;
+    font-size: 2.5rem;
+}
+
+h2{
+    color: rgb(24, 26, 24);
+    text-align: center;
+    font-size: 1.5rem;
+}
+
+h4{
+    color: black;
+    font-size: 1.5rem;
+    margin-bottom: 0%;
+    margin-top: 0%;
+}
+nav input{
+    display: block;
+    width: 90%;
+    text-align: center;
+    border-radius: 20px;
+    margin: .5rem auto .5rem auto;
+}
+.btns{
+    text-align: center;
+    margin: 1rem;
+}
+
+/* landingPage */
+#landingHeader{
+    display: table-cell;
+    width: 100vw;
+    height: 45vh;
+    background-color: green;
+    vertical-align: middle;
+}
+#landingHeader h1{
+    color: aliceblue;
+    
+}
+#landingBtn{
+    text-align: center;
+}
+#landingBtn input{
+    width: 8rem;
+    height: 3.5rem;
+    color: aliceblue;
+    background-color: rgb(29, 73, 25);
+    margin-top: 40px;
+    font-size: 1.3rem;
+}
+
+/* home */
+#logout{
+    float: right;
+    margin-right: 3rem;
+}
+
+#login{
+    display: block;
+}
+
+nav button{
+    width: 15%;
+    list-style: none;
+    border-radius: 10px;
+    background-color:greenyellow;
+    box-shadow: 5px 7px rgba(79, 51, 30, 0.5);
+    padding:  .5rem 1rem .5rem 1rem;
+}
+
+/* all forms */
+
+span{
+    color: red;
+    font-size: 1rem;
+}
+form{
+    background-color: antiquewhite;
+    border-radius: 1rem;
+    border: double 8px rgb(160, 135, 106);
+    padding: 1rem;
+    margin: 1rem;
+    text-align: center;
+}
+
+/* all form inputs */
+form input{
+    display: block;
+    width: 20rem;
+    text-align: center;
+    border-radius: 20px;
+    margin: auto auto auto auto;
+}
+
+form button{
+    display: block;
+    margin: .5rem auto .5rem auto;
+    padding: .5rem 1rem .5rem 1rem;
+}
+
+form label{
+    display: block;
+    margin: 0.5rem auto 0.5rem auto;
+    font-size: 1rem;
+    color: black;
+}
+/* assets display */
+
+.assetBox{
+    font-size: 1rem;
+    color: rgb(0, 0, 0);
+    background-color: #EADDC4;
+    border: double 4px #EADDC4;
+    border-radius: 25px;
+    border-bottom: rgba(143, 111, 111, 0.3) solid 10px;
+    margin: 0em auto 0.5rem auto;
+}
+.assetBox .nav{
+    float:right;
+}
+.assetBox p, h6{
+    display: inline;
+}
+.assetBox th, td{
+    width: 5%;
+    border: black;
+    margin: 0.5rem;
+}

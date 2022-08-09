@@ -5,6 +5,7 @@
         header('Location: login.html');
         exit;
     }
+
     require_once('./inc/dbcon.php');
     require_once('./inc/header.php');
     $assetId = $_GET['assetId'];
@@ -17,14 +18,14 @@
 ?>
 
 
-<h1><?= 'Release: '. $row['assetBrand']. ' '.  $row['assetName'] ?></h1>
+<h1><?= 'Retire: '. $row['assetBrand']. ' '.  $row['assetName'] ?></h1>
 
 <!-- asset information -->
 <?php 
     // echo $assetId
     ?>
     <div class="formContainer">
-<form method="GET" action="processRelease.php">
+<form method="GET" action="processRetire.php">
     <fieldset name="assetInformation" class="assetInfo">
         <legend>asset Detail</legend>
         <h2>Are you sure you want to release <?= $row['assetBrand']. ' '.  $row['assetName'] . ' Asset tag: '. $row['assetTag']. ' from: '. $row['assetAssignedTo'] ?></h2>
@@ -35,7 +36,7 @@
         <?= 'Asset Brand: '. $row['assetBrand'] ?> <br>
         <?= 'Asset Status: '. $row['assetStatus'] ?> <br>
         <?= 'Asset Assigned To: '. $row['assetAssignedTo'] ?> <br>
-        <button type="submit" name="confirmRelease">Release</button>
+        <button type="submit" name="confirmRetire">Retire</button>
     </fieldset>
 </form>
 </div>

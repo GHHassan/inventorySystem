@@ -1,5 +1,5 @@
 <?php
-    require_once('./inc/header.html');
+    require_once('./inc/header.php');
 ?>
 <body>
         <section id="landingHeader">

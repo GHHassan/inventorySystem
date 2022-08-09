@@ -1,32 +1,56 @@
+<?php
+session_start();
+mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
+// Change this to your connection info.
+$DATABASE_HOST = 'localhost';
+$DATABASE_USER = 'root';
+$DATABASE_PASS = '';
+$DATABASE_NAME = 'eInventory';
+// Try and connect using the info above.
+$con = mysqli_connect($DATABASE_HOST, $DATABASE_USER, $DATABASE_PASS, $DATABASE_NAME);
+$con = new mysqli($DATABASE_HOST, $DATABASE_USER, $DATABASE_PASS, $DATABASE_NAME);
+if ( mysqli_connect_errno() ) {
+	// If there is an error with the connection, stop the script and display the error.
+	exit('Failed to connect to MySQL: ' . mysqli_connect_error());
+}
 
-<?php 
-$host = 'localhost';
-$user = 'root';
-$password = 'MYSQLpassword123';
-$dbname = 'einventory';
-
-
-// // connecting to the database using mysqli
-  //  $dbConn = new mysqli($host, $user, $password, $dbname);
-
-  //  // checking the connection and displaying error message if failed
-  //  if ($dbConn->connect_error) {
-  //     echo "<p>Connection failed: ".$dbConn->connect_error."</p>\n";
-      
-  //     exit;
-  // }
-
-  // connecting to database using pdo
-  $dsn = 'mysql:host='. $host . '; dbname=' . $dbname;
- 
-  try{
-   $pdo = new PDO($dsn, $user, $password);
-   $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-   $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-  }catch(PDOException $e){
-    echo"connection failed". $e->getMessage();
-  }
+// Now we check if the data from the login form was submitted, isset() will check if the data exists.
+if ( !isset($_POST['useremail'], $_POST['password']) ) {
+	// Could not get the data that should have been sent.
+	exit('Please fill both the username and password fields!');
+}
+// Prepare our SQL, preparing the SQL statement will prevent SQL injection.
+if ($stmt = $con->prepare('SELECT id, username, password, email, role FROM accounts WHERE email = ?')) {
+	// Bind parameters (s = string, i = int, b = blob, etc), in our case the username is a string so we use "s"
+	$stmt->bind_param('s', $_POST['useremail']);
+	$stmt->execute();
+	// Store the result so we can check if the account exists in the database.
+	$stmt->store_result();
+	
+    if ($stmt->num_rows > 0) {
+        $stmt->bind_result($id, $username, $password, $email, $role);
+        $stmt->fetch();
+        // Account exists, now we verify the password.
+        // Note: remember to use password_hash in your registration file to store the hashed passwords.
+        if (password_verify($_POST['password'], $password)) {
+            // Verification success! User has logged-in!
+            // Create sessions, so we know the user is logged in, they basically act like cookies but remember the data on the server.
+            session_regenerate_id();
+            $_SESSION['loggedin'] = TRUE;
+            $_SESSION['email'] = $_POST['useremail'];
+            $_SESSION['name'] = $username;
+            $_SESSION['role'] = $role;
+            $_SESSION['id'] = $id;
+            header('Location: ../index.php');
+            // header('Location: thome.php');
+        } else {
+            // Incorrect password
+            echo 'Incorrect username and/or password!';
+        }
+    } else {
+        // Incorrect username
+        echo 'Incorrect username and/or password!';
+    }
+    $stmt->close();
+}
 ?>
-
-
